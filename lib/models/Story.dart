@@ -12,26 +12,13 @@ class Story {
 
 class ProfileStories {
   final int profileId;
-  final String profileImageUrl;
+  final String profileName, profileImageUrl;
   final List<Story> storyItem;
 
   ProfileStories({
     @required this.profileId,
+    @required this.profileName,
     @required this.profileImageUrl,
     @required this.storyItem,
   });
 }
-
-List<ProfileStories> stories = [
-  ProfileStories(
-    profileId: 1,
-    profileImageUrl:
-        'https://knightscollege.edu.au/wp-content/uploads/wp-user-manager-uploads/2020/08/johnkick2.png',
-    storyItem: [
-      Story(
-        id: 1,
-        videoUrl: 'https://media.giphy.com/media/p4w0AMZJa2EtG/giphy.gif',
-      )
-    ],
-  )
-];
