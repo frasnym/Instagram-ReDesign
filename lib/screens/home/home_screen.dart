@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/home/components/feeds_overview.dart';
 import 'package:instagram_redesign/screens/home/components/stories_overview.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,7 +12,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: Column(
-        children: [StoriesOverview()],
+        children: [
+          StoriesOverview(),
+          FeedsOverview(),
+        ],
       ),
     );
   }
