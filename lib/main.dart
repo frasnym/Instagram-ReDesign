@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_redesign/constants.dart';
 import 'package:instagram_redesign/screens/home/home_screen.dart';
 
 void main() {
@@ -10,6 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Instagram ReDesign',
+      debugShowCheckedModeBanner: false,
+      color: kWhiteColor,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
