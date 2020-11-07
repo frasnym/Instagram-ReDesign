@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_redesign/constants.dart';
-import 'package:instagram_redesign/screens/home/components/feeds_overview.dart';
+import 'package:instagram_redesign/screens/home/components/feed_item.dart';
 import 'package:instagram_redesign/screens/home/components/stories_overview.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,11 +11,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Column(
-        children: [
-          StoriesOverview(),
-          FeedsOverview(),
-        ],
+      body: ListView.builder(
+        // Make +1 because we adding Stories Widget
+        itemCount: 10 + 1,
+        itemBuilder: (context, index) {
+          // Make first item always show Stories Widget
+          if (index == 0) {
+            return StoriesOverview();
+          }
+          return FeedItem();
+        },
       ),
     );
   }
@@ -34,6 +39,7 @@ class HomeScreen extends StatelessWidget {
       ),
       actions: [
         IconButton(
+          // Load icon from SVG
           icon: SvgPicture.asset(
             'assets/icons/camera.svg',
             width: kDefaultSize,
@@ -44,6 +50,7 @@ class HomeScreen extends StatelessWidget {
           color: kBlackColor,
         ),
         IconButton(
+          // Load icon from SVG
           icon: SvgPicture.asset(
             'assets/icons/direct.svg',
             width: kDefaultSize,
