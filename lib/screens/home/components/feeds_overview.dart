@@ -8,20 +8,26 @@ class FeedsOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          ClipRRect(
-            child: SizedBox(
-              height: 280,
-              width: double.infinity,
-              child: Image.network(
-                'https://i.ibb.co/rfqQ0w0/feed-1.jpg',
-                fit: BoxFit.cover,
+          Container(
+            margin: const EdgeInsets.only(bottom: kDefaultPaddin),
+            child: ClipRRect(
+              child: Container(
+                height: 280,
+                width: double.infinity,
+                child: Image.network(
+                  'https://i.ibb.co/rfqQ0w0/feed-1.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
+              borderRadius: BorderRadius.circular(30),
             ),
-            borderRadius: BorderRadius.circular(30),
           ),
           Positioned(
             top: kDefaultPaddin / 1.5,
@@ -103,6 +109,65 @@ class FeedsOverview extends StatelessWidget {
                 Icons.more_horiz,
                 color: kWhiteColor,
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: screenSize.width * 0.7,
+              padding: const EdgeInsets.symmetric(
+                vertical: kDefaultPaddin / 2,
+                horizontal: kDefaultPaddin,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: kWhiteColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0.5,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildRichText(Icons.favorite, '7.2k', Colors.red),
+                  buildRichText(Icons.comment_rounded, '241', Colors.grey),
+                  buildRichText(Icons.send, '', Colors.grey),
+                  buildRichText(Icons.archive, '', Colors.grey),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  RichText buildRichText(IconData icon, String text, Color iconColor) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          WidgetSpan(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: kDefaultPaddin / 4,
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 17,
+              ),
+            ),
+          ),
+          TextSpan(
+            text: text,
+            style: TextStyle(
+              fontSize: 13,
+              color: kBlackColor,
+              fontFamily: 'Gilroy',
             ),
           ),
         ],

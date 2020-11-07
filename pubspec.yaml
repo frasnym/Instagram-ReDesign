@@ -66,6 +66,9 @@ flutter:
     - family: Billabong
       fonts:
         - asset: assets/fonts/Billabong.ttf
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy-Black.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
