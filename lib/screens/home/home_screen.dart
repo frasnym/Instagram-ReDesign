@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_redesign/constants.dart';
 import 'package:instagram_redesign/screens/home/components/feed_item.dart';
 import 'package:instagram_redesign/screens/home/components/stories_overview.dart';
+import 'package:instagram_redesign/DUMMY_DATA.dart' as dummy;
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -13,13 +14,13 @@ class HomeScreen extends StatelessWidget {
       appBar: buildAppBar(),
       body: ListView.builder(
         // Make +1 because we adding Stories Widget
-        itemCount: 10 + 1,
+        itemCount: dummy.feeds.length + 1,
         itemBuilder: (context, index) {
           // Make first item always show Stories Widget
           if (index == 0) {
             return StoriesOverview();
           }
-          return FeedItem();
+          return FeedItem(feedItem: dummy.feeds[index - 1]);
         },
       ),
     );

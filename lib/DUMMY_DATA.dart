@@ -1,4 +1,28 @@
+import 'package:instagram_redesign/models/Feed.dart';
 import 'package:instagram_redesign/models/Story.dart';
+
+final List<Feed> feeds = [
+  Feed(
+    id: 1,
+    profileId: 2,
+    profileName: 'Jane',
+    profileImageUrl: 'https://i.ibb.co/q951535/2.jpg',
+    imageUrl: 'https://i.ibb.co/rfqQ0w0/feed-1.jpg',
+    location: 'Jakarta, Indonesia',
+    comments: '1',
+    likes: '2',
+  ),
+  Feed(
+    id: 2,
+    profileId: 2,
+    profileName: 'Jane',
+    profileImageUrl: 'https://i.ibb.co/q951535/2.jpg',
+    imageUrl: 'https://i.ibb.co/47ShKFJ/feed-2.jpg',
+    location: 'India',
+    comments: '10k',
+    likes: '3k',
+  ),
+];
 
 final List<ProfileStories> stories = [
   ProfileStories(

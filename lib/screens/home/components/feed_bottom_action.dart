@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
 
 class FeedBottomAction extends StatelessWidget {
+  final String comments;
+  final String likes;
+
   const FeedBottomAction({
     Key key,
+    this.comments,
+    this.likes,
   }) : super(key: key);
 
   @override
@@ -31,8 +36,8 @@ class FeedBottomAction extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            buildRichText(Icons.favorite, '7.2k', Colors.red),
-            buildRichText(Icons.comment_rounded, '241', Colors.grey),
+            buildRichText(Icons.favorite, likes, Colors.red),
+            buildRichText(Icons.comment_rounded, comments, Colors.grey),
             buildRichText(Icons.send, '', Colors.grey),
             buildRichText(Icons.archive, '', Colors.grey),
           ],

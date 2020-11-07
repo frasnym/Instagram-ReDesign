@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
 
 class FeedProfileInfo extends StatelessWidget {
+  final String name;
+  final String imageUrl;
+  final String locationUpload;
+
   const FeedProfileInfo({
     Key key,
+    this.name,
+    this.imageUrl,
+    this.locationUpload,
   }) : super(key: key);
 
   @override
@@ -29,14 +36,14 @@ class FeedProfileInfo extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.network('https://i.ibb.co/dQKdPTK/1.jpg'),
+              child: Image.network(imageUrl),
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'User Profile Name',
+              Text(
+                name,
                 style: TextStyle(
                   color: kWhiteColor,
                   fontWeight: FontWeight.bold,
@@ -44,7 +51,7 @@ class FeedProfileInfo extends StatelessWidget {
               ),
               const SizedBox(height: 3),
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   children: [
                     WidgetSpan(
                       child: Padding(
@@ -58,8 +65,8 @@ class FeedProfileInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const TextSpan(
-                      text: 'User Profile Location',
+                    TextSpan(
+                      text: locationUpload,
                       style: TextStyle(
                         fontSize: 11,
                         color: kWhiteColor,
