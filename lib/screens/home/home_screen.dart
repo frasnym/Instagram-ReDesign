@@ -16,19 +16,22 @@ class HomeScreen extends StatelessWidget {
         appBar: buildAppBar(),
         body: Stack(
           children: [
-            ListView.builder(
-              // Make +1 because we adding Stories Widget
-              itemCount: dummy.feeds.length + 1,
-              itemBuilder: (context, index) {
-                // Make first item always show Stories Widget
-                if (index == 0) {
-                  return StoriesOverview();
-                }
-                return FeedItem(feedItem: dummy.feeds[index - 1]);
-              },
+            Container(
+              margin: const EdgeInsets.only(bottom: kDefaultPaddin * 3.5),
+              child: ListView.builder(
+                // Make +1 because we adding Stories Widget
+                itemCount: dummy.feeds.length + 1,
+                itemBuilder: (context, index) {
+                  // Make first item always show Stories Widget
+                  if (index == 0) {
+                    return StoriesOverview();
+                  }
+                  return FeedItem(feedItem: dummy.feeds[index - 1]);
+                },
+              ),
             ),
             // Bottom Navigation Bar
-            BottomNavBar()
+            BottomNavBar(),
           ],
         ));
   }
