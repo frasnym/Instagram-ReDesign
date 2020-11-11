@@ -24,49 +24,46 @@ class BottomNavBar extends StatelessWidget {
           showUnselectedLabels: false,
           items: [
             buildBottomNavigationBarItem(
-              Icon(
+              icon: Icon(
                 Icons.home,
                 color: kWhiteColor,
               ),
-              'Home',
-              true,
-              kDefaultPaddin / 4,
+              label: 'Home',
+              padding: kDefaultPaddin / 4,
+              isSelected: true,
             ),
             buildBottomNavigationBarItem(
-              Icon(
+              icon: Icon(
                 Icons.search_outlined,
                 color: kWhiteColor,
               ),
-              'Explore',
-              false,
-              kDefaultPaddin / 4,
+              label: 'Explore',
+              padding: kDefaultPaddin / 4,
             ),
             buildBottomNavigationBarItem(
-              Icon(
+              icon: Icon(
                 Icons.add,
                 color: kWhiteColor,
               ),
-              'Add',
-              false,
-              kDefaultPaddin / 2.5,
+              label: 'Add',
+              padding: kDefaultPaddin / 2.5,
             ),
             buildBottomNavigationBarItem(
-              Icon(
+              icon: Icon(
                 Icons.favorite_border,
                 color: kWhiteColor,
               ),
-              'Activity',
-              false,
-              kDefaultPaddin / 4,
+              label: 'Activity',
+              padding: kDefaultPaddin / 4,
+              activity: 5,
             ),
             buildBottomNavigationBarItem(
-              Icon(
+              icon: Icon(
                 Icons.person_outline,
                 color: kWhiteColor,
               ),
-              'User',
-              false,
-              kDefaultPaddin / 4,
+              label: 'User',
+              padding: kDefaultPaddin / 4,
             )
           ],
         ),
@@ -74,23 +71,50 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem buildBottomNavigationBarItem(
+  BottomNavigationBarItem buildBottomNavigationBarItem({
     Widget icon,
     String label,
-    bool isSelected,
     double padding,
-  ) {
+    int activity = 0,
+    bool isSelected = false,
+  }) {
     return BottomNavigationBarItem(
-      icon: Container(
-        padding: EdgeInsets.all(padding),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: isSelected ? Colors.grey.withOpacity(0.1) : Colors.transparent,
-          border: label == 'Add'
-              ? Border.all(width: 1, color: kWhiteColor)
-              : Border.all(width: 0, color: Colors.transparent),
-        ),
-        child: icon,
+      icon: Stack(
+        children: [
+          Container(
+            padding: EdgeInsets.all(padding),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isSelected
+                  ? Colors.grey.withOpacity(0.1)
+                  : Colors.transparent,
+              border: label == 'Add'
+                  ? Border.all(width: 1, color: kWhiteColor)
+                  : Border.all(width: 0, color: Colors.transparent),
+            ),
+            child: icon,
+          ),
+          activity > 0
+              ? Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.all(2.5),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox(width: 0),
+        ],
       ),
       label: label,
     );
