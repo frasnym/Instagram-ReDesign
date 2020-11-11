@@ -13,20 +13,23 @@ class BottomNavBar extends StatelessWidget {
       right: 0,
       bottom: 0,
       child: ClipRRect(
+        // Border Radius on TopLeft & TopRight
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(kDefaultSize),
           topLeft: Radius.circular(kDefaultSize),
         ),
         child: BottomNavigationBar(
+          // To use BottomNavigationBar with more than 3 items
           type: BottomNavigationBarType.fixed,
-          backgroundColor: kBlackColor,
+          backgroundColor: kWhiteColor,
+          // To use BottomNavigationBar without label
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: [
             buildBottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                color: kWhiteColor,
+                color: kBlackColor,
               ),
               label: 'Home',
               padding: kDefaultPaddin / 4,
@@ -35,7 +38,7 @@ class BottomNavBar extends StatelessWidget {
             buildBottomNavigationBarItem(
               icon: Icon(
                 Icons.search_outlined,
-                color: kWhiteColor,
+                color: kBlackColor,
               ),
               label: 'Explore',
               padding: kDefaultPaddin / 4,
@@ -43,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
             buildBottomNavigationBarItem(
               icon: Icon(
                 Icons.add,
-                color: kWhiteColor,
+                color: kBlackColor,
               ),
               label: 'Add',
               padding: kDefaultPaddin / 2.5,
@@ -51,7 +54,7 @@ class BottomNavBar extends StatelessWidget {
             buildBottomNavigationBarItem(
               icon: Icon(
                 Icons.favorite_border,
-                color: kWhiteColor,
+                color: kBlackColor,
               ),
               label: 'Activity',
               padding: kDefaultPaddin / 4,
@@ -60,7 +63,7 @@ class BottomNavBar extends StatelessWidget {
             buildBottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outline,
-                color: kWhiteColor,
+                color: kBlackColor,
               ),
               label: 'User',
               padding: kDefaultPaddin / 4,
@@ -85,15 +88,18 @@ class BottomNavBar extends StatelessWidget {
             padding: EdgeInsets.all(padding),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              // To add background color on icon selected
               color: isSelected
                   ? Colors.grey.withOpacity(0.1)
                   : Colors.transparent,
+              // To add border color on add icon
               border: label == 'Add'
-                  ? Border.all(width: 1, color: kWhiteColor)
+                  ? Border.all(width: 1, color: kBlackColor)
                   : Border.all(width: 0, color: Colors.transparent),
             ),
             child: icon,
           ),
+          // To add badge on BottomRight, especially used for activity icon
           activity > 0
               ? Positioned(
                   right: 0,
