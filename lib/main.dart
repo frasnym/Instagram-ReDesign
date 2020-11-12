@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/explore/explore_screen.dart';
 import 'package:instagram_redesign/screens/home/home_screen.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       home: HomeScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
+        ExploreScreen.routeName: (ctx) => ExploreScreen(),
       },
     );
   }

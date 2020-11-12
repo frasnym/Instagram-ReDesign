@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/explore/explore_screen.dart';
+import 'package:instagram_redesign/screens/home/home_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     Key key,
+    this.pages,
   }) : super(key: key);
+
+  final List<bool> pages;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,10 @@ class BottomNavBar extends StatelessWidget {
               ),
               label: 'Home',
               padding: kDefaultPaddin / 4,
-              isSelected: true,
+              isSelected: pages[0],
+              press: () => Navigator.of(context).pushReplacementNamed(
+                HomeScreen.routeName,
+              ),
             ),
             buildBottomNavigationBarItem(
               icon: Icon(
@@ -42,6 +50,10 @@ class BottomNavBar extends StatelessWidget {
               ),
               label: 'Explore',
               padding: kDefaultPaddin / 4,
+              isSelected: pages[1],
+              press: () => Navigator.of(context).pushReplacementNamed(
+                ExploreScreen.routeName,
+              ),
             ),
             buildBottomNavigationBarItem(
               icon: Icon(
@@ -50,6 +62,8 @@ class BottomNavBar extends StatelessWidget {
               ),
               label: 'Add',
               padding: kDefaultPaddin / 2.5,
+              isSelected: pages[2],
+              press: () => {},
             ),
             buildBottomNavigationBarItem(
               icon: Icon(
@@ -59,6 +73,8 @@ class BottomNavBar extends StatelessWidget {
               label: 'Activity',
               padding: kDefaultPaddin / 4,
               activity: 5,
+              isSelected: pages[3],
+              press: () => {},
             ),
             buildBottomNavigationBarItem(
               icon: Icon(
@@ -67,7 +83,9 @@ class BottomNavBar extends StatelessWidget {
               ),
               label: 'User',
               padding: kDefaultPaddin / 4,
-            )
+              isSelected: pages[4],
+              press: () => {},
+            ),
           ],
         ),
       ),
@@ -80,47 +98,51 @@ class BottomNavBar extends StatelessWidget {
     double padding,
     int activity = 0,
     bool isSelected = false,
+    Function press,
   }) {
     return BottomNavigationBarItem(
-      icon: Stack(
-        children: [
-          Container(
-            padding: EdgeInsets.all(padding),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              // To add background color on icon selected
-              color: isSelected
-                  ? Colors.grey.withOpacity(0.1)
-                  : Colors.transparent,
-              // To add border color on add icon
-              border: label == 'Add'
-                  ? Border.all(width: 1, color: kBlackColor)
-                  : Border.all(width: 0, color: Colors.transparent),
+      icon: GestureDetector(
+        onTap: press,
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.all(padding),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                // To add background color on icon selected
+                color: isSelected
+                    ? Colors.grey.withOpacity(0.1)
+                    : Colors.transparent,
+                // To add border color on add icon
+                border: label == 'Add'
+                    ? Border.all(width: 1, color: kBlackColor)
+                    : Border.all(width: 0, color: Colors.transparent),
+              ),
+              child: icon,
             ),
-            child: icon,
-          ),
-          // To add badge on BottomRight, especially used for activity icon
-          activity > 0
-              ? Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(4.0),
-                    decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
+            // To add badge on BottomRight, especially used for activity icon
+            activity > 0
+                ? Positioned(
+                    right: 0,
+                    bottom: 0,
                     child: Container(
-                      padding: const EdgeInsets.all(2.5),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
+                      padding: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              : SizedBox(width: 0),
-        ],
+                  )
+                : SizedBox(width: 0),
+          ],
+        ),
       ),
       label: label,
     );
