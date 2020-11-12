@@ -10,6 +10,7 @@ class ExploreScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          // Build sticky categories button
           NestedScrollView(
             headerSliverBuilder: (
               BuildContext context,
@@ -22,12 +23,15 @@ class ExploreScreen extends StatelessWidget {
                   sliver: SliverAppBar(
                     elevation: 0,
                     backgroundColor: kWhiteColor,
+                    // scrollable title SliverAppBar
                     title: buildSizedBoxSearch(),
                     floating: true,
                     snap: true,
+                    // pinned/sticky bottom SliverAppBar
                     pinned: true,
                     forceElevated: innerBoxIsScrolled,
                     expandedHeight: 120,
+                    // SliverAppBar buttom must be PreferredSizeWidget
                     bottom: PreferredSize(
                       preferredSize:
                           const Size(double.infinity, kToolbarHeight),
@@ -37,6 +41,7 @@ class ExploreScreen extends StatelessWidget {
                           horizontal: kDefaultPaddin,
                         ),
                         height: 36,
+                        // Building ListView with horizontal scroll direction
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
