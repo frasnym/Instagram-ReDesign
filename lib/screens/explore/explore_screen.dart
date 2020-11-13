@@ -25,6 +25,9 @@ class ExploreScreen extends StatelessWidget {
       'https://usabilla.com/blog/wp-content/uploads/2015/11/2ppylfixhd8-saksham-gangwar.jpg',
       'https://www.capellapreschool.com/wp-content/uploads/2019/08/chameleon-in-leo-lionni-a-color-of-his-own-1024x767.jpg',
       'https://www.adobe.com/content/dam/cc/us/en/creativecloud/design/discover/is-black-a-color/desktop/is-black-a-color_P3_720x350.jpg',
+      'https://smallbiztrends.com/wp-content/uploads/2016/12/color-psychology.png',
+      'https://img.freepik.com/free-vector/green-orange-color-flow-background_7649-169.jpg',
+      'https://wp-en.oberlo.com/wp-content/uploads/2019/08/toa-heftiba-0WAJhFK7Q9o-unsplash.jpg',
     ];
     // Generates a new Random object
     final _random = new Random();
