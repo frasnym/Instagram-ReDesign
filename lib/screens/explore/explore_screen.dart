@@ -1,5 +1,11 @@
+import "dart:math";
+
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/explore/components/big_image_left.dart';
+import 'package:instagram_redesign/screens/explore/components/big_image_right.dart';
+import 'package:instagram_redesign/screens/explore/components/normal_image.dart';
+import 'package:instagram_redesign/screens/explore/components/search_bar.dart';
 import 'package:instagram_redesign/widgets/bottom_nav_bar.dart';
 
 class ExploreScreen extends StatelessWidget {
@@ -7,6 +13,36 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
+    final List<String> imageList = [
+      'https://cached.imagescaler.hbpl.co.uk/resize/scaleWidth/815/cached.offlinehbpl.hbpl.co.uk/news/SUC/color1-20191204062437970.jpg',
+      'https://miro.medium.com/max/960/1*c94SpnDXD8imHLUW0fl-ng.jpeg',
+      'https://htmlcolorcodes.com/assets/images/html-color-codes-color-palette-generators-thumb.jpg',
+      'https://cdn.ragan.com/wp-content/uploads/2019/07/color_marketing_psychology.jpg',
+      'https://img.freepik.com/free-photo/abstract-blur-green-color-background_7182-1948.jpg',
+      'https://resize.hswstatic.com/w_796/gif/color-box.jpg',
+      'https://usabilla.com/blog/wp-content/uploads/2015/11/2ppylfixhd8-saksham-gangwar.jpg',
+      'https://www.capellapreschool.com/wp-content/uploads/2019/08/chameleon-in-leo-lionni-a-color-of-his-own-1024x767.jpg',
+      'https://www.adobe.com/content/dam/cc/us/en/creativecloud/design/discover/is-black-a-color/desktop/is-black-a-color_P3_720x350.jpg',
+    ];
+    // Generates a new Random object
+    final _random = new Random();
+    // Select random list
+    // imageList[_random.nextInt(imageList.length)]
+
+    // Used for image pattern
+    // 1-0-0
+    // 0-1-0
+    // 0-0-1
+    // 0-1-0
+    // 1-0-0
+    // 0-1-0
+    // 0-0-1
+    var normalCount = 0;
+    var rightCount = 0;
+    var leftCount = 1;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -24,7 +60,7 @@ class ExploreScreen extends StatelessWidget {
                     elevation: 0,
                     backgroundColor: kWhiteColor,
                     // scrollable title SliverAppBar
-                    title: buildSizedBoxSearch(),
+                    title: SearchBar(),
                     floating: true,
                     snap: true,
                     // pinned/sticky bottom SliverAppBar
@@ -59,25 +95,93 @@ class ExploreScreen extends StatelessWidget {
               ];
             },
             body: Builder(builder: (BuildContext context) {
-              return CustomScrollView(
-                // The "controller" and "primary" members should be left
-                // unset, so that the NestedScrollView can control this
-                // inner scroll view.
-                // If the "controller" property is set, then this scroll
-                // view will not be associated with the NestedScrollView.
-                slivers: <Widget>[
-                  SliverOverlapInjector(
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: kDefaultPaddin / 2,
+                  horizontal: kDefaultPaddin,
+                ),
+                child: CustomScrollView(
+                  // The "controller" and "primary" members should be left
+                  // unset, so that the NestedScrollView can control this
+                  // inner scroll view.
+                  // If the "controller" property is set, then this scroll
+                  // view will not be associated with the NestedScrollView.
+                  slivers: <Widget>[
+                    SliverOverlapInjector(
                       handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context)),
-                  SliverFixedExtentList(
-                    itemExtent: 48.0,
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) =>
-                          ListTile(title: Text('Item $index')),
-                      childCount: 30,
+                          context),
                     ),
-                  ),
-                ],
+                    SliverFixedExtentList(
+                      itemExtent: (screenSize.width - 40) * 0.66,
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          // Show 6 images with normal size
+                          if (normalCount == 1) {
+                            // Check what to show next
+                            if (rightCount == 1) {
+                              // Show left big image next
+                              leftCount = 1;
+                              normalCount = 0;
+                              rightCount = 0;
+                            } else if (leftCount == 1) {
+                              // Show right big image next
+                              leftCount = 0;
+                              normalCount = 0;
+                              rightCount = 1;
+                            }
+
+                            return NormalImage(
+                              screenSize: screenSize,
+                              imageList: [
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                              ],
+                            );
+                          }
+
+                          // Show 3 images with big size on left
+                          if (leftCount == 1) {
+                            // leftCount = 0;
+                            normalCount = 1;
+                            rightCount = 0;
+                            return BigImageLeft(
+                              index: index,
+                              screenSize: screenSize,
+                              imageList: [
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                              ],
+                            );
+                          }
+
+                          // Show 3 images with big size on right
+                          if (rightCount == 1) {
+                            leftCount = 0;
+                            // rightCount = 0;
+                            normalCount = 1;
+                            return BigImageRight(
+                              screenSize: screenSize,
+                              imageList: [
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                                imageList[_random.nextInt(imageList.length)],
+                              ],
+                            );
+                          }
+
+                          // Default Return
+                          return const SizedBox(height: kDefaultPaddin);
+                        },
+                        childCount: 10,
+                      ),
+                    ),
+                  ],
+                ),
               );
             }),
           ),
@@ -98,50 +202,6 @@ class ExploreScreen extends StatelessWidget {
         label: Text(label),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kDefaultSize / 2),
-        ),
-      ),
-    );
-  }
-
-  SizedBox buildSizedBoxSearch() {
-    return SizedBox(
-      height: 40,
-      child: TextField(
-        decoration: InputDecoration(
-          // Fill color of textfield
-          filled: true,
-          fillColor: kGreyColorLight,
-          contentPadding: const EdgeInsets.symmetric(vertical: 0),
-          suffixIcon: Container(
-            // Separator didn't reach top & bottom
-            margin: const EdgeInsets.symmetric(vertical: 5),
-            // Make separator on left
-            decoration: const BoxDecoration(
-              border: const Border(
-                left: const BorderSide(
-                  width: 1,
-                  color: kGreyColor,
-                ),
-              ),
-            ),
-            child: const Icon(
-              Icons.qr_code,
-              color: kGreyColor,
-            ),
-          ),
-          // Prefix icon
-          prefixIcon: const Icon(
-            Icons.search,
-            color: kGreyColor,
-          ),
-          hintText: "Search...",
-          hintStyle: const TextStyle(color: kGreyColor),
-          border: const OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(kDefaultPaddin / 2),
-            ),
-            borderSide: BorderSide.none,
-          ),
         ),
       ),
     );
