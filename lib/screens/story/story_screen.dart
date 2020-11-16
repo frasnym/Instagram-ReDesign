@@ -13,7 +13,9 @@ class StoryScreen extends StatefulWidget {
 
 class _StoryScreenState extends State<StoryScreen> {
   VideoPlayerController _controller;
-  // Future<void> _initializeVideoPlayerFuture;
+  Future<void> _initializeVideoPlayerFuture;
+  double _videoProgress = 0.0;
+  double _videoDuration = 0.0;
 
   @override
   void initState() {
@@ -26,8 +28,22 @@ class _StoryScreenState extends State<StoryScreen> {
       // 'http://www.exit109.com/~dnn/clips/RW20seconds_2.mp4',
     );
 
+    // Listener to create video progress
+    _controller.addListener(() {
+      double seconds = _controller.value.position.inSeconds.toDouble();
+
+      // check if video duration not set
+      if (_videoDuration == seconds) {
+        _videoDuration = _controller.value.duration.inSeconds.toDouble();
+      }
+
+      setState(() {
+        _videoProgress = seconds / _videoDuration;
+      });
+    });
+
     // Initialize the controller and store the Future for later use.
-    // _initializeVideoPlayerFuture = _controller.initialize();
+    _initializeVideoPlayerFuture = _controller.initialize();
 
     // Use the controller to loop the video.
     _controller.setLooping(true);
@@ -53,66 +69,102 @@ class _StoryScreenState extends State<StoryScreen> {
       body: Column(
         children: [
           StoryHeader(screenSize: screenSize, storyItems: storyItems),
-          GestureDetector(
-            // Pause/Play video onTap
-            onTap: () {
-              setState(() {
-                // If the video is playing, pause it.
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  // If the video is paused, play it.
-                  _controller.play();
-                }
-              });
-            },
-            child: Container(
-              // height 100 used for Header
-              height: screenSize.height - 100,
-              // Take all width device
-              width: screenSize.width,
-              child: ClipRRect(
-                // Make Border Radius on Video: topLeft & topRight
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(kDefaultSize),
-                  topRight: Radius.circular(kDefaultSize),
-                ),
-                child: SizedBox.expand(
-                  // Expand the video based on width & height given
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width: _controller.value.size?.width ?? 0,
-                      height: _controller.value.size?.height ?? 0,
-                      child: VideoPlayer(_controller),
-                    ),
-                  ),
-                ),
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 15,
+              left: kDefaultPaddin / 2,
+              right: kDefaultPaddin / 2,
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: LinearProgressIndicator(
+                backgroundColor: kGreyColorLight,
+                valueColor: const AlwaysStoppedAnimation<Color>(kGreyColor),
+                value: _videoProgress,
+                minHeight: 5,
               ),
             ),
           ),
-          // Container(
-          //   margin: EdgeInsets.only(top: screenSize.height * 0.3),
-          //   child: FutureBuilder(
-          //     future: _initializeVideoPlayerFuture,
-          //     builder: (context, snapshot) {
-          //       if (snapshot.connectionState == ConnectionState.done) {
-          //         // If the VideoPlayerController has finished initialization, use
-          //         // the data it provides to limit the aspect ratio of the video.
-          //         return AspectRatio(
-          //           aspectRatio: _controller.value.aspectRatio,
-          //           // Use the VideoPlayer widget to display the video.
-          //           child: VideoPlayer(_controller),
-          //         );
-          //       } else {
-          //         // If the VideoPlayerController is still initializing, show a
-          //         // loading spinner.
-          //         return Center(child: CircularProgressIndicator());
-          //       }
-          //     },
-          //   ),
-          // ),
+          FutureBuilder(
+            future: _initializeVideoPlayerFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                // If the VideoPlayerController has finished initialization, use
+                // the data it provides to limit the aspect ratio of the video.
+
+                return GestureDetector(
+                  // Pause/Play video onTap
+                  onTap: () {
+                    setState(() {
+                      // If the video is playing, pause it.
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                      } else {
+                        // If the video is paused, play it.
+                        _controller.play();
+                      }
+                    });
+                  },
+                  child: buildContainerExpand(
+                    screenSize,
+                    _controller.value.size?.width ?? 0,
+                    _controller.value.size?.height ?? 0,
+                    VideoPlayer(_controller),
+                  ),
+                );
+              } else {
+                // If the VideoPlayerController is still initializing, show a
+                // loading spinner.
+                return buildContainerExpand(
+                  screenSize,
+                  screenSize.width,
+                  screenSize.height,
+                  Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            },
+          ),
         ],
+      ),
+    );
+  }
+
+  Container buildContainerExpand(
+    Size screenSize,
+    double width,
+    double height,
+    Widget content,
+  ) {
+    return Container(
+      // height 100 used for Header
+      height: screenSize.height - 120,
+      // Take all width device
+      width: screenSize.width,
+
+      child: ClipRRect(
+        // Make Border Radius on Video: topLeft & topRight
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(kDefaultSize),
+          topRight: Radius.circular(kDefaultSize),
+        ),
+        child: SizedBox.expand(
+          // Expand the video based on width & height given
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: SizedBox(
+              width: width,
+              height: height,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: kGreyColor,
+                ),
+                child: content,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
