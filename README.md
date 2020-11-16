@@ -1,6 +1,26 @@
-# Flutter: Catering App
+# Instagram ReDesign App - Flutter
 
-Building a catering app with Flutter
+Building a Instagram ReDesign App With Flutter
+
+## Features
+<details>
+    <summary>[Spoiler] Application Features</summary>
+    <ul>
+        <li>
+            <b>1.0.0</b>
+            <ul>
+                <li>
+                    <b>New Features</b>
+                    <ul>
+                        <li>Home Screen</li>
+                        <li>Explorer Screen. Image shown positioned as Intagram pattern</li>
+                        <li>Story Screen. Pause/play with gesture on video, Adding progress bar based on video</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</details>
 
 ## Tools Used
 
@@ -16,7 +36,7 @@ Building a catering app with Flutter
 | [flutter_svg](https://pub.dev/packages/flutter_svg) | 0.19.1 |
 | [video_player](https://pub.dev/packages/video_player) | 1.0.0 |
 
-### App UI
--
+## App UI
+Coming Soon
 
 [Design Credits](https://dribbble.com/YUEYUEGUY)
