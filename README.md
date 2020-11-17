@@ -35,6 +35,7 @@ Building a Instagram ReDesign App With Flutter
 | ------ | ------ |
 | [flutter_svg](https://pub.dev/packages/flutter_svg) | 0.19.1 |
 | [video_player](https://pub.dev/packages/video_player) | 1.0.0 |
+| [url_launcher](https://pub.dev/packages/url_launcher) | 5.7.8 |
 
 ## App UI
 Coming Soon

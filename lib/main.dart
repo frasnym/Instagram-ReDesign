@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         ExploreScreen.routeName: (ctx) => ExploreScreen(),
         StoryScreen.routeName: (ctx) => StoryScreen(),
+        // TODO Activity Screen
+        // TODO Profile Screen
+        // TODO Sign In
       },
     );
   }
