@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
 import 'package:instagram_redesign/models/Story.dart';
+import 'package:instagram_redesign/screens/story/components/send_message_bar.dart';
 import 'package:instagram_redesign/screens/story/components/story_header.dart';
 import 'package:video_player/video_player.dart';
 
@@ -28,6 +29,19 @@ class _StoryScreenState extends State<StoryScreen> {
       // 'http://www.exit109.com/~dnn/clips/RW20seconds_2.mp4',
     );
 
+    // Initialize the controller and store the Future for later use.
+    _initializeVideoPlayerFuture = _controller.initialize();
+
+    // Use the controller to loop the video.
+    _controller.setLooping(true);
+
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     // Listener to create video progress
     _controller.addListener(() {
       double seconds = _controller.value.position.inSeconds.toDouble();
@@ -41,14 +55,6 @@ class _StoryScreenState extends State<StoryScreen> {
         _videoProgress = seconds / _videoDuration;
       });
     });
-
-    // Initialize the controller and store the Future for later use.
-    _initializeVideoPlayerFuture = _controller.initialize();
-
-    // Use the controller to loop the video.
-    _controller.setLooping(true);
-
-    super.initState();
   }
 
   @override
@@ -66,6 +72,8 @@ class _StoryScreenState extends State<StoryScreen> {
         ModalRoute.of(context).settings.arguments as ProfileStories;
 
     return Scaffold(
+      // Keyboard shown does not overflow
+      resizeToAvoidBottomPadding: false,
       body: Column(
         children: [
           StoryHeader(screenSize: screenSize, storyItems: storyItems),
@@ -160,7 +168,23 @@ class _StoryScreenState extends State<StoryScreen> {
                 decoration: BoxDecoration(
                   color: kGreyColor,
                 ),
-                child: content,
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    content,
+                    Positioned(
+                      bottom: kDefaultPaddin,
+                      child: Container(
+                        height: 100 + kDefaultPaddin * 3,
+                        width: width,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPaddin * 1.5,
+                        ),
+                        child: SendMessageBar(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
