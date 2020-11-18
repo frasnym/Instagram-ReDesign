@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/activity/activity_screen.dart';
 import 'package:instagram_redesign/screens/explore/explore_screen.dart';
 import 'package:instagram_redesign/screens/home/home_screen.dart';
 
@@ -74,7 +75,9 @@ class BottomNavBar extends StatelessWidget {
               padding: kDefaultPaddin / 4,
               activity: 5,
               isSelected: pages[3],
-              press: () => {},
+              press: () => Navigator.of(context).pushReplacementNamed(
+                ActivityScreen.routeName,
+              ),
             ),
             buildBottomNavigationBarItem(
               icon: Icon(

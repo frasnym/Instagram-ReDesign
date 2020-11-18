@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/activity/activity_screen.dart';
 import 'package:instagram_redesign/screens/explore/explore_screen.dart';
 import 'package:instagram_redesign/screens/home/home_screen.dart';
 import 'package:instagram_redesign/screens/story/story_screen.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: kWhiteColor,
       theme: ThemeData(
+        fontFamily: 'Gilroy',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         ExploreScreen.routeName: (ctx) => ExploreScreen(),
         StoryScreen.routeName: (ctx) => StoryScreen(),
-        // TODO Activity Screen
+        ActivityScreen.routeName: (ctx) => ActivityScreen(),
         // TODO Profile Screen
         // TODO Sign In
       },
