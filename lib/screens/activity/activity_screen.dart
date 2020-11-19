@@ -27,6 +27,26 @@ class ActivityScreen extends StatelessWidget {
                 if (index == 0) {
                   return FriendSuggestion();
                 }
+                if (index == 1) {
+                  return RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                            fontSize: 15,
+                          ),
+                      children: [
+                        const TextSpan(
+                          text: 'New   ',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: '(10)',
+                        ),
+                      ],
+                    ),
+                  );
+                }
                 return FriendActivity();
               },
             ),
