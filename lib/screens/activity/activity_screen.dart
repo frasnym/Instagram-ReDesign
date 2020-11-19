@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_redesign/constants.dart';
+import 'package:instagram_redesign/screens/activity/components/friend_activity.dart';
 import 'package:instagram_redesign/screens/activity/components/friend_suggestion.dart';
 import 'package:instagram_redesign/widgets/bottom_nav_bar.dart';
 
@@ -13,21 +14,20 @@ class ActivityScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: kDefaultPaddin,
+            margin: const EdgeInsets.only(
+              right: kDefaultPaddin,
+              left: kDefaultPaddin,
+              bottom: kDefaultPaddin * 4,
             ),
             child: ListView.builder(
               // Make +1 because we adding Stories Widget
-              itemCount: 5,
+              itemCount: 10,
               itemBuilder: (context, index) {
                 // Make first item always show Suggestion
                 if (index == 0) {
                   return FriendSuggestion();
                 }
-                return Container(
-                  height: 200,
-                  child: Text('activity'),
-                );
+                return FriendActivity();
               },
             ),
           ),

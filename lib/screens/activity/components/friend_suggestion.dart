@@ -33,7 +33,7 @@ class FriendSuggestion extends StatelessWidget {
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       blurRadius: 3.0,
-                      offset: Offset(0.0, 3.0),
+                      offset: const Offset(0.0, 3.0),
                     ),
                   ],
                 ),
@@ -53,13 +53,13 @@ class FriendSuggestion extends StatelessWidget {
                         ),
                       ),
                     ),
-                    FittedBox(
-                      child: Text('Name'),
+                    const FittedBox(
+                      child: const Text('Name'),
                     ),
-                    FittedBox(
+                    const FittedBox(
                       child: Text(
                         'Occupation',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 8,
                           fontWeight: FontWeight.w100,
                           color: kGreyColor,
@@ -81,7 +81,7 @@ class FriendSuggestion extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.person_add,
                       size: 15,
                       color: kWhiteColor,

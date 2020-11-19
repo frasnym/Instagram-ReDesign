@@ -15,7 +15,7 @@ Building a Instagram ReDesign App With Flutter
                         <li>Home Screen</li>
                         <li>Explorer Screen. Image shown positioned as Intagram pattern</li>
                         <li>Story Screen. Pause/play with gesture on video, Adding progress bar based on video, Send message</li>
-                        <li>Activity Screen. Friend suggestion horizontal scrolling</li>
+                        <li>Activity Screen. Friend suggestion horizontal scrolling, Friend activitym vertical scrolling</li>
                     </ul>
                 </li>
             </ul>
