@@ -42,3 +42,16 @@ Building a Instagram ReDesign App With Flutter
 Coming Soon
 
 [Design Credits](https://dribbble.com/YUEYUEGUY)
+
+### Flutter Cheat Sheet
+| Weight | Description |
+| ------ | ------ |
+| w100 | Thin, the least thick |
+| w200 | Extra-light |
+| w300 | Light |
+| w400 | Normal / regular / plain |
+| w500 | Medium |
+| w600 | Semi-bold |
+| w700 | Bold |
+| w800 | Extra-bold |
+| w900 | Black, the most thick |
