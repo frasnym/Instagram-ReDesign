@@ -3,6 +3,7 @@ import 'package:instagram_redesign/constants.dart';
 import 'package:instagram_redesign/screens/activity/activity_screen.dart';
 import 'package:instagram_redesign/screens/explore/explore_screen.dart';
 import 'package:instagram_redesign/screens/home/home_screen.dart';
+import 'package:instagram_redesign/screens/profile/profile_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -87,7 +88,9 @@ class BottomNavBar extends StatelessWidget {
               label: 'User',
               padding: kDefaultPaddin / 4,
               isSelected: pages[4],
-              press: () => {},
+              press: () => Navigator.of(context).pushReplacementNamed(
+                ProfileScreen.routeName,
+              ),
             ),
           ],
         ),
