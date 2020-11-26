@@ -31,8 +31,8 @@ class HighLightItem extends StatelessWidget {
               border: Border.all(
                 color: borderColor,
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
+              borderRadius: const BorderRadius.all(
+                const Radius.circular(15),
               ),
               color: fillColor,
             ),
@@ -43,7 +43,7 @@ class HighLightItem extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w300,
               color: kBlackColor,
