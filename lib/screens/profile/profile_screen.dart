@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ) {
               return <Widget>[
                 SliverAppBar(
-                  toolbarHeight: 220,
+                  toolbarHeight: 250,
                   // backgroundColor: kWhiteColor,
                   title: ColapsedAppBar(),
                   pinned: true, //<-- pinned to true
