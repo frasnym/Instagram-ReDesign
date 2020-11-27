@@ -61,6 +61,7 @@ class ProfileBottomSection extends StatelessWidget {
         text: 'Time',
       ),
     ];
+
     return Column(
       children: [
         Row(

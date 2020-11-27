@@ -19,7 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   void initState() {
     super.initState();
     _scrollViewController = new ScrollController();
-    _tabController = new TabController(vsync: this, length: 2);
+    _tabController = new TabController(vsync: this, length: 5);
   }
 
   @override
@@ -43,26 +43,50 @@ class _ProfileScreenState extends State<ProfileScreen>
             ) {
               return <Widget>[
                 SliverAppBar(
-                  toolbarHeight: 250,
+                  toolbarHeight: 260,
                   backgroundColor: kWhiteColor,
                   title: ColapsedAppBar(),
                   pinned: true, //<-- pinned to true
                   floating: true, //<-- floating to true
                   forceElevated:
                       innerBoxIsScrolled, //<-- forceElevated to innerBoxIsScrolled
-                  bottom: new TabBar(
+                  bottom: TabBar(
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicator: const UnderlineTabIndicator(
+                      borderSide: const BorderSide(
+                        color: kBlackColor,
+                        width: 5.0,
+                      ),
+                      insets: const EdgeInsets.fromLTRB(40.0, 0.0, 40.0, 40.0),
+                    ),
                     tabs: <Tab>[
-                      new Tab(
-                        text: "STATISTICS",
-                        icon: new Icon(
+                      Tab(
+                        icon: Icon(
+                          Icons.pivot_table_chart,
+                          color: kBlackColor,
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
                           Icons.show_chart,
                           color: kBlackColor,
                         ),
                       ),
-                      new Tab(
-                        text: "HISTORY",
-                        icon: new Icon(
-                          Icons.history,
+                      Tab(
+                        icon: Icon(
+                          Icons.play_circle_fill,
+                          color: kBlackColor,
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.group,
+                          color: kBlackColor,
+                        ),
+                      ),
+                      Tab(
+                        icon: Icon(
+                          Icons.archive,
                           color: kBlackColor,
                         ),
                       ),
@@ -74,8 +98,11 @@ class _ProfileScreenState extends State<ProfileScreen>
             },
             body: new TabBarView(
               children: <Widget>[
-                Text('new StatisticsPage()'),
-                Text('new HistoryPage()'),
+                Text('pivot_table_chart'),
+                Text('show_chart'),
+                Text('play_circle_fill'),
+                Text('group'),
+                Text('archive'),
               ],
               controller: _tabController,
             ),

@@ -12,6 +12,7 @@ class ColapsedAppBar extends StatelessWidget {
         ProfileTopSection(),
         const SizedBox(height: kDefaultPaddin / 2),
         ProfileBottomSection(),
+        const SizedBox(height: kDefaultPaddin),
       ],
     );
   }
