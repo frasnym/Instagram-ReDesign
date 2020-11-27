@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_redesign/constants.dart';
-import 'package:instagram_redesign/widgets/bottom_nav_bar.dart';
 import 'package:instagram_redesign/screens/home/components/feed_item.dart';
 import 'package:instagram_redesign/screens/home/components/stories_overview.dart';
 import 'package:instagram_redesign/DUMMY_DATA.dart' as dummy;
+import 'package:instagram_redesign/widgets/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   sendOrder() async {
     String url = 'https://wa.me/6281999200585?text=';
     String order =
-        'Hello, I want to buy/modify this Instagram ReDesign Application';
+        'Hello, I got information from Instagram ReDesign Application. I want to hire you';
 
     order = Uri.encodeComponent(order);
 
@@ -29,26 +29,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(sendOrder),
-      body: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: kDefaultPaddin * 3.5),
-            child: ListView.builder(
-              // Make +1 because we adding Stories Widget
-              itemCount: dummy.feeds.length + 1,
-              itemBuilder: (context, index) {
-                // Make first item always show Stories Widget
-                if (index == 0) {
-                  return StoriesOverview();
-                }
-                return FeedItem(feedItem: dummy.feeds[index - 1]);
-              },
-            ),
-          ),
-          // Bottom Navigation Bar
-          BottomNavBar(pages: [true, false, false, false, false]),
-        ],
+      body: ListView.builder(
+        itemCount:
+            dummy.feeds.length + 1, // Make +1 because we adding Stories Widget
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            // Make first item always show Stories Widget
+            return StoriesOverview();
+          }
+          return FeedItem(feedItem: dummy.feeds[index - 1]);
+        },
       ),
+      bottomNavigationBar:
+          BottomNavBar(pages: [true, false, false, false, false]),
     );
   }
 
@@ -72,7 +65,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const FittedBox(
             child: const Text(
-              'You can modif/buy this app. Click Instagram Text',
+              'Hire me. Click Instagram Text',
               style: const TextStyle(
                 color: kBlackColor,
               ),

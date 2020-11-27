@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               return <Widget>[
                 SliverAppBar(
                   toolbarHeight: 250,
-                  // backgroundColor: kWhiteColor,
+                  backgroundColor: kWhiteColor,
                   title: ColapsedAppBar(),
                   pinned: true, //<-- pinned to true
                   floating: true, //<-- floating to true
@@ -54,11 +54,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                     tabs: <Tab>[
                       new Tab(
                         text: "STATISTICS",
-                        icon: new Icon(Icons.show_chart),
+                        icon: new Icon(
+                          Icons.show_chart,
+                          color: kBlackColor,
+                        ),
                       ),
                       new Tab(
                         text: "HISTORY",
-                        icon: new Icon(Icons.history),
+                        icon: new Icon(
+                          Icons.history,
+                          color: kBlackColor,
+                        ),
                       ),
                     ],
                     controller: _tabController,
