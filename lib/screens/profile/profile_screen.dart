@@ -42,61 +42,10 @@ class _ProfileScreenState extends State<ProfileScreen>
               bool innerBoxIsScrolled,
             ) {
               return <Widget>[
-                SliverAppBar(
-                  toolbarHeight: 260,
-                  backgroundColor: kWhiteColor,
-                  title: ColapsedAppBar(),
-                  pinned: true, //<-- pinned to true
-                  floating: true, //<-- floating to true
-                  forceElevated:
-                      innerBoxIsScrolled, //<-- forceElevated to innerBoxIsScrolled
-                  bottom: TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicator: const UnderlineTabIndicator(
-                      borderSide: const BorderSide(
-                        color: kBlackColor,
-                        width: 5.0,
-                      ),
-                      insets: const EdgeInsets.fromLTRB(40.0, 0.0, 40.0, 40.0),
-                    ),
-                    tabs: <Tab>[
-                      Tab(
-                        icon: Icon(
-                          Icons.pivot_table_chart,
-                          color: kBlackColor,
-                        ),
-                      ),
-                      Tab(
-                        icon: Icon(
-                          Icons.show_chart,
-                          color: kBlackColor,
-                        ),
-                      ),
-                      Tab(
-                        icon: Icon(
-                          Icons.play_circle_fill,
-                          color: kBlackColor,
-                        ),
-                      ),
-                      Tab(
-                        icon: Icon(
-                          Icons.group,
-                          color: kBlackColor,
-                        ),
-                      ),
-                      Tab(
-                        icon: Icon(
-                          Icons.archive,
-                          color: kBlackColor,
-                        ),
-                      ),
-                    ],
-                    controller: _tabController,
-                  ),
-                ),
+                buildSliverAppBar(innerBoxIsScrolled),
               ];
             },
-            body: new TabBarView(
+            body: TabBarView(
               children: <Widget>[
                 Text('pivot_table_chart'),
                 Text('show_chart'),
@@ -109,6 +58,61 @@ class _ProfileScreenState extends State<ProfileScreen>
           ), // Bottom Navigation Bar
           BottomNavBar(pages: [false, false, false, false, true]),
         ],
+      ),
+    );
+  }
+
+  SliverAppBar buildSliverAppBar(bool innerBoxIsScrolled) {
+    return SliverAppBar(
+      toolbarHeight: 260,
+      backgroundColor: kWhiteColor,
+      title: ColapsedAppBar(),
+      pinned: true, //<-- pinned to true
+      floating: true, //<-- floating to true
+      forceElevated:
+          innerBoxIsScrolled, //<-- forceElevated to innerBoxIsScrolled
+      bottom: TabBar(
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicator: const UnderlineTabIndicator(
+          borderSide: const BorderSide(
+            color: kBlackColor,
+            width: 5.0,
+          ),
+          insets: const EdgeInsets.fromLTRB(40.0, 0.0, 40.0, 40.0),
+        ),
+        tabs: <Tab>[
+          const Tab(
+            icon: const Icon(
+              Icons.pivot_table_chart,
+              color: kBlackColor,
+            ),
+          ),
+          const Tab(
+            icon: const Icon(
+              Icons.show_chart,
+              color: kBlackColor,
+            ),
+          ),
+          const Tab(
+            icon: const Icon(
+              Icons.play_circle_fill,
+              color: kBlackColor,
+            ),
+          ),
+          const Tab(
+            icon: const Icon(
+              Icons.group,
+              color: kBlackColor,
+            ),
+          ),
+          const Tab(
+            icon: const Icon(
+              Icons.archive,
+              color: kBlackColor,
+            ),
+          ),
+        ],
+        controller: _tabController,
       ),
     );
   }
